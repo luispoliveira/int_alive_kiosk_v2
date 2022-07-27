@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "lib": [
+      "es6",
+      "DOM"
+    ] /* Specify which libraries to include in the compilation. */,
+    "declaration": true,
+    "allowJs": false,
+    "checkJs": false,
+    "outDir": "build" /* Specify where to put the output file(s). */,
+    "rootDir": "." /* Specify the root directory of input files. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "noImplicitAny": true /* Warn on expressions and declarations with an implied 'any' type. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "resolveJsonModule": true /* Resolve json files in node_modules. */,
+    "types": [
+      "node",
+      "@types/jest"
+    ] /* Specify type definitions to be used for resolving types of input files. */,
+    "typeRoots": [
+      "./node_modules/@types"
+    ] /* Specify the location of type definitions for third-party modules. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */
+  },
+  "include": ["./src/**/*"],
+  "exclude": [
+    "./src/**/*.test.ts",
+    "tsconfig.json"
+  ] /* Specify files to include in compilation. */,
+  "references": [{ "path": "../../" }]
+}

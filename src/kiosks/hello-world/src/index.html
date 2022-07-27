@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div id="container">
+    Hello World!
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script>
+    var exports = {
+      __esModule: true
+    };
+  </script>
+  <script src="./renderer.js"></script>
+</body>
+
+</html>

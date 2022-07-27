@@ -1,0 +1,46 @@
+{
+  "name": "hello-world-electron",
+  "version": "1.0.0",
+  "description": "HELLO WORLD KIOSK",
+  "main": "index.js",
+  "scripts": {
+    "init:dev": "npm i && npm link alive-kiosk && --module-dir alive-kiosk && npm run electron:rebuild:symlink",
+    "init:prod": "npm i && npm i git+https://rip3rs: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@github.com/3Decideteam/int_alive_kiosk.git",
+    "watch": "gulp --color watchTask",
+    "deploy:assets": "gulp --color deployAssets",
+    "build": "tsc -p tsconfig.json",
+    "electron:run:local": "electron --no-sandbox --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --force_high_performance_gpu --force_low_power_gpu --enable-accelerated-video-decode build/index.js",
+    "electron:run": "electron --no-sandbox --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --force_high_performance_gpu --force_low_power_gpu --enable-accelerated-video-decode index.js",
+    "electron:rebuild": "electron-rebuild",
+    "electron:dist": "electron-builder",
+    "electron:rebuild:symlink": "electron-rebuild --module-dir alive-kiosk",
+    "pm2:setup": "gulp --color setupPm"
+  },
+  "keywords": [],
+  "author": "3Decide",
+  "build": {
+    "appId": "com.3decide.alivekiosk.hello-world",
+    "linux": {
+      "category": "AliveKiosk",
+      "target": {
+        "target": "zip",
+        "arch": "armv7l"
+      }
+    },
+    "asarUnpack": [
+      "assets",
+      "index.html",
+      "styles.css",
+      "config"
+    ]
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^19.0.8",
+    "electron-builder": "^23.1.0",
+    "electron-rebuild": "^3.2.8"
+  },
+  "dependencies": {
+    "alive-kiosk": "file:./alive-kiosk"
+  }
+}
