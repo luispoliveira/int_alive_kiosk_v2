@@ -1,0 +1,21 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "test:led": "node leds/index.js",
+    "test:button": "node buttons/index.js",
+    "build": "tsc",
+    "watch": "gulp --color watchTask"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "onoff": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.2"
+  }
+}

@@ -1,1 +1,2 @@
-console.log('Hello World');
+import { kioskBuilder } from './shared/infra/kioskBuilder';
+export { kioskBuilder };

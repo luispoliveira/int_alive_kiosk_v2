@@ -11,7 +11,8 @@
   },
   "workspaces": [
     "./src/alive-kiosk",
-    "./src/kiosks/*"
+    "./src/kiosks/*",
+    "./src/tests/"
   ],
   "keywords": [],
   "license": "ISC",

@@ -1,1 +1,8 @@
-{}
+{
+  "buttons": {
+    "addresses": [{
+      "gpioPin": 17,
+      "gpioEdge": "both"
+    }]
+  }
+}
