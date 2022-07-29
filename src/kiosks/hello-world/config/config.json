@@ -1,8 +1,49 @@
 {
   "buttons": {
     "addresses": [{
-      "gpioPin": 17,
-      "gpioEdge": "both"
-    }]
-  }
+        "gpioPin": 23,
+        "gpioEdge": "both"
+      },
+      {
+        "gpioPin": 25,
+        "gpioEdge": "both"
+      }
+    ]
+  },
+  "leds": {
+    "addresses": [{
+        "gpioPin": 17
+      },
+      {
+        "gpioPin": 18
+      },
+      {
+        "gpioPin": 27
+      },
+      {
+        "gpioPin": 22
+      },
+      {
+        "gpioPin": 5
+      },
+      {
+        "gpioPin": 6
+      },
+      {
+        "gpioPin": 13
+      },
+      {
+        "gpioPin": 19
+      }
+    ]
+  },
+  "connections": [{
+      "button": 23,
+      "leds": [17, 18, 27, 22]
+    },
+    {
+      "button": 25,
+      "leds": [5, 6, 13, 19]
+    }
+  ]
 }

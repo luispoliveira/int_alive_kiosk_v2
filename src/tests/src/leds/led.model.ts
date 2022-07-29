@@ -1,7 +1,16 @@
-import { Edge, Gpio, Options } from 'onoff';
+import { BinaryValue, Edge, Gpio, Options } from 'onoff';
 
-export class Led extends Gpio {
+export class Led {
+  public gpio: Gpio;
   constructor(gpioPin: number, gpioEdge?: Edge, gpioOptions?: Options) {
-    super(gpioPin, 'out', gpioEdge, gpioOptions);
+    this.gpio = new Gpio(gpioPin, 'out', gpioEdge, gpioOptions);
+  }
+}
+
+export class LedUtils {
+  public static changeState(leds: Led[], value: BinaryValue) {
+    leds.forEach((led) => {
+      led.gpio.writeSync(value);
+    });
   }
 }

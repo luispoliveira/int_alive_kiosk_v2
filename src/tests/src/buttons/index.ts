@@ -1,25 +1,63 @@
 import { BinaryValue } from 'onoff';
-import { Led } from '../leds/led.model';
+import { Led, LedUtils } from '../leds/led.model';
 import { Button } from './button.model';
 
-const greenLed = new Led(4);
-const button = new Button(17, 'both');
+const button = new Button(23, 'both');
+const greenLed = new Led(17);
+const redLed = new Led(18);
+const blueLed = new Led(27);
+const yellowLed = new Led(22);
 
-const handleButtonPush = (err: unknown, value: BinaryValue) => {
-  if (err) {
-    console.error(`There was an error: ${err}`);
+const leds = [greenLed, redLed, blueLed, yellowLed];
+
+let runLoading = false;
+let indexCount = 0;
+let loadingState = 'done';
+const loading = async () => {
+  if (loadingState === 'done') return;
+
+  if (!runLoading) {
+    LedUtils.changeState(leds, 0);
     return;
   }
 
-  greenLed.writeSync(value);
+  if (indexCount === leds.length) {
+    LedUtils.changeState(leds, 0);
+    await sleep(250);
+    LedUtils.changeState(leds, 1);
+    loadingState = 'done';
+    return;
+  }
+  const led = leds[indexCount];
+  led.gpio.writeSync(1);
+  indexCount++;
 };
 
-button.watch(handleButtonPush);
+const loadingInterval = setInterval(loading, 250);
+
+button.gpio.watch((err, value: BinaryValue) => {
+  console.log(`Button value: ${value}`);
+  if (value === 1) {
+    runLoading = true;
+    loadingState = 'loading';
+  } else {
+    LedUtils.changeState(leds, 0);
+    runLoading = false;
+    indexCount = 0;
+  }
+});
 
 const unexportOnClose = () => {
-  greenLed.writeSync(0);
-  greenLed.unexport();
-  button.unexport();
+  clearInterval(loadingInterval);
+  leds.forEach((led) => {
+    led.gpio.writeSync(0);
+    led.gpio.unexport();
+  });
+  button.gpio.unexport();
+};
+
+const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 process.on('SIGINT', unexportOnClose);

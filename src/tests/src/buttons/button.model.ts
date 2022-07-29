@@ -1,7 +1,8 @@
 import { Edge, Gpio, Options } from 'onoff';
 
-export class Button extends Gpio {
+export class Button {
+  public gpio: Gpio;
   constructor(gpioPin: number, gpioEdge: Edge, gpioOptions?: Options) {
-    super(gpioPin, 'in', gpioEdge, gpioOptions);
+    this.gpio = new Gpio(gpioPin, 'in', gpioEdge, gpioOptions);
   }
 }

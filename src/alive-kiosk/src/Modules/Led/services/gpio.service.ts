@@ -1,18 +1,17 @@
-import { Edge, Gpio, Options } from 'onoff';
-import { ButtonInterface } from '../../../shared/domain/interfaces/button.interface';
+import { Gpio, Options } from 'onoff';
+import { LedInterface } from '../../../shared/domain/interfaces/led.interface';
 
 export class GpioOnOffService {
   gpio: Gpio;
   gpioPin: number;
-  gpioEdge: Edge;
   gpioOptions: Options | undefined;
 
-  constructor(config: ButtonInterface) {
+  constructor(config: LedInterface) {
     try {
       this.gpioPin = config.gpioPin;
-      this.gpioEdge = config.gpioEdge;
       if (config.gpioOptions) this.gpioOptions = config.gpioOptions;
-      this.gpio = new Gpio(this.gpioPin, 'in', this.gpioEdge, this.gpioOptions);
+      this.gpio = new Gpio(this.gpioPin, 'out', undefined, this.gpioOptions);
+
     } catch (error) {
       console.error(error);
       throw error;
@@ -21,5 +20,13 @@ export class GpioOnOffService {
 
   unexport(): void {
     this.gpio.unexport();
+  }
+
+  turnLedOn(): void {
+    this.gpio.write(1);
+  }
+
+  turnLedOff(): void {
+    this.gpio.write(0);
   }
 }

@@ -1,4 +1,5 @@
 import { ButtonEvents } from '../../Modules/Button/infra/events/button.events';
+import { LedEvents } from '../../Modules/Led/infra/events/led.events';
 import { ConfigApi } from '../config/config.api';
 import { KioskType } from './types/kiosk.type';
 
@@ -18,6 +19,12 @@ export const kioskBuilder = async (rootPath: string): Promise<KioskType> => {
     const buttonEvents = new ButtonEvents();
     buttonEvents.start(config.buttons);
     kiosk.buttons = buttonEvents;
+  }
+
+  if (config.leds) {
+    const ledEvents = new LedEvents();
+    ledEvents.start(config.leds);
+    kiosk.leds = ledEvents;
   }
 
   console.info(

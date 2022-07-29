@@ -13,29 +13,23 @@ export class ButtonEvents
   start(config: ButtonOptionsInterface): void {
     const addresses = config.addresses;
 
-    for (const address of addresses) {
-      const gpioOnOffService = new GpioOnOffService(address);
+    try {
+      for (const address of addresses) {
+        const gpioOnOffService = new GpioOnOffService(address);
 
-      gpioOnOffService.gpioButton.watch((err, value) => {
-        switch (gpioOnOffService.gpioEdge) {
-          case 'rising':
-            console.log(`Button Rising ${address.gpioPin} is ${value}`);
-            this.emit('rising', gpioOnOffService.gpioPin);
-            break;
-          case 'both':
-            console.log(`Button Both ${address.gpioPin} is ${value}`);
-            this.emit('rising', gpioOnOffService.gpioPin);
-            break;
-          case 'falling':
-            console.log(`Button Falling ${address.gpioPin} is ${value}`);
-            this.emit('rising', gpioOnOffService.gpioPin);
-            break;
-        }
-      });
-
-      process.on('SIGINT', () => {
-        gpioOnOffService.unexport();
-      });
+        gpioOnOffService.gpio.watch((err, value) => {
+          console.log(
+            `Button ${gpioOnOffService.gpioEdge} ${address.gpioPin} is ${value}`,
+          );
+          this.emit(gpioOnOffService.gpioEdge, {
+            gpioNumber: address.gpioPin,
+            value,
+          });
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 }
