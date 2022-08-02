@@ -35,6 +35,9 @@ const createWindow = async () => {
     kiosk.buttons?.on(
       'both',
       (output: { gpioNumber: number; value: number }) => {
+        console.log(
+          `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
+        );
         handleLoading(kiosk, output, ledUtils);
       },
     );

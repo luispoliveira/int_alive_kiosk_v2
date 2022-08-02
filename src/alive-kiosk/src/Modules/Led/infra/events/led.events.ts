@@ -18,15 +18,11 @@ export class LedEvents extends EventEmitter implements LedEventsInterface {
       }
 
       this.on('on', (gpioPin: number) => {
-        this.leds.map((led) => {
-          if (led.gpioPin === gpioPin) led.turnLedOn();
-        });
+        this.leds.find((led) => led.gpioPin === gpioPin)?.turnLedOn();
       });
 
       this.on('off', (gpioPin: number) => {
-        this.leds.map((led) => {
-          if (led.gpioPin === gpioPin) led.turnLedOff();
-        });
+        this.leds.find((led) => led.gpioPin === gpioPin)?.turnLedOff();
       });
     } catch (error) {
       console.error(error);

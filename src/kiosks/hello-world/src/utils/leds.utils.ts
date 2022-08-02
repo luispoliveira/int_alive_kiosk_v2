@@ -25,6 +25,7 @@ export class LedUtils {
     this.toRun = true;
     this.loadingState = 'loading';
     this.changeState(this.leds, 0);
+    console.log('Start Loading');
     while (this.toRun) {
       this.runLoading();
       await sleep(250);
@@ -50,8 +51,10 @@ export class LedUtils {
         await sleep(1500);
         this.changeState(this.leds, 0);
         this.stopLoading();
+        console.log('Stop Loading');
         return;
       }
+      console.log('Loading');
       const led = this.leds[this.indexCount];
       this.kiosk.leds?.emit('on', led);
       this.indexCount++;
