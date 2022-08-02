@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "test:led": "node leds/index.js",
+    "test:led:strip": "node leds/led-strip.js",
     "test:button": "node buttons/index.js",
     "build": "tsc",
     "watch": "gulp --color watchTask"

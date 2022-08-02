@@ -11,7 +11,6 @@ export class GpioOnOffService {
       this.gpioPin = config.gpioPin;
       if (config.gpioOptions) this.gpioOptions = config.gpioOptions;
       this.gpio = new Gpio(this.gpioPin, 'out', undefined, this.gpioOptions);
-
     } catch (error) {
       console.error(error);
       throw error;

@@ -5,6 +5,14 @@ export class Led {
   constructor(gpioPin: number, gpioEdge?: Edge, gpioOptions?: Options) {
     this.gpio = new Gpio(gpioPin, 'out', gpioEdge, gpioOptions);
   }
+
+  on() {
+    this.gpio.writeSync(1);
+  }
+
+  off() {
+    this.gpio.writeSync(0);
+  }
 }
 
 export class LedUtils {
