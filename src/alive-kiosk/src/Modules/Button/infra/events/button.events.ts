@@ -21,6 +21,7 @@ export class ButtonEvents
           this.emit(gpioOnOffService.gpioEdge, {
             gpioNumber: address.gpioPin,
             value,
+            type: address.type,
           });
         });
       }

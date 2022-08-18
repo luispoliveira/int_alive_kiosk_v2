@@ -9,10 +9,21 @@
         "path": "./assets/idle.mp4"
       },
       "1": {
-        "path": "./assets/1.mp4"
+        "path": "./assets/pt-1.mp4"
       },
       "2": {
-        "path": "./assets/2.mp4"
+        "path": "./assets/pt-2.mp4"
+      }
+    },
+    "EN": {
+      "idle": {
+        "path": "./assets/idle.mp4"
+      },
+      "1": {
+        "path": "./assets/en-1.mp4"
+      },
+      "2": {
+        "path": "./assets/en-2.mp4"
       }
     }
   },
@@ -20,18 +31,30 @@
     "addresses": [
       {
         "gpioPin": 22,
-        "gpioEdge": "both"
+        "gpioEdge": "both",
+        "type": "VIDEO"
       },
       {
         "gpioPin": 23,
-        "gpioEdge": "both"
+        "gpioEdge": "both",
+        "type": "VIDEO"
+      },
+      {
+        "gpioPin": 24,
+        "gpioEdge": "both",
+        "type": "LANGUAGE"
+      },
+      {
+        "gpioPin": 25,
+        "gpioEdge": "both",
+        "type": "LANGUAGE"
       }
     ]
   },
   "leds": {
     "addresses": [
       {
-        "numberLeds": 20,
+        "numberLeds": 30,
         "options": {
           "gpio": 21,
           "stripType": "ws2812"
@@ -55,6 +78,22 @@
         "ledsNumbers": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
       },
       "video": "2"
+    },
+    {
+      "button": 24,
+      "language": "EN",
+      "stripLeds": {
+        "gpioNumber": 21,
+        "ledsNumbers": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+      }
+    },
+    {
+      "button": 25,
+      "language": "PT",
+      "stripLeds": {
+        "gpioNumber": 21,
+        "ledsNumbers": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+      }
     }
   ]
 }

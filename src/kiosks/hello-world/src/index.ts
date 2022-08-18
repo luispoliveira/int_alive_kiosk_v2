@@ -6,12 +6,14 @@ import { KioskType } from 'alive-kiosk/build/src/shared/infra/types/kiosk.type';
 import StripLedsUtils from 'alive-kiosk/build/src/shared/utils/strip-leds.utils';
 import VideoUtils from 'alive-kiosk/build/src/shared/utils/video.utils';
 import { handleLoading } from './handler/leds.handler';
-import { handleVideo } from './handler/video.handler';
+import { handleVideoSelection } from './handler/video.handler';
+import { ButtonTypeEnum } from 'alive-kiosk/build/src/shared/enums/button-type.enum';
+import { handleLanguageSelection } from './handler/language.handler';
+import { LanguagesEnum } from 'alive-kiosk/build/src/shared/enums/languages.enum';
 
 let kiosk: KioskType;
 let ledUtils: StripLedsUtils;
 let videoUtils: VideoUtils;
-let currentLanguage: string;
 
 const createWindow = async () => {
   const win = new BrowserWindow({
@@ -37,19 +39,20 @@ const createWindow = async () => {
   win.webContents.on('did-finish-load', async () => {
     kiosk.buttons?.on(
       'both',
-      (output: { gpioNumber: number; value: number }) => {
+      (output: { gpioNumber: number; value: number; type: ButtonTypeEnum }) => {
         console.log(
           `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
         );
+
         handleLoading(kiosk, output, ledUtils, () => {
-          const videoPath = handleVideo(
-            kiosk,
-            currentLanguage,
-            output,
-            videoUtils,
-          );
-          if (videoPath) {
-            win.webContents.send('playVideo', videoPath);
+          console.log('🚀 ~ file: index.ts ~ line 50 ~ done', output);
+          switch (output.type) {
+            case ButtonTypeEnum.VIDEO:
+              handleVideoSelection(kiosk, output, videoUtils, win);
+              break;
+            case ButtonTypeEnum.LANGUAGE:
+              handleLanguageSelection(kiosk, output, videoUtils, win);
+              break;
           }
         });
       },
@@ -66,7 +69,6 @@ const init = async () => {
   // TODO: Remove kiosk variable from global...
   // By adding kioskbuilder here (before was on win creation), there is a huge decrease of segmentation fault and other types of error
   kiosk = await kioskBuilder(__dirname);
-  currentLanguage = kiosk.config.base?.defaultLanguage || 'PT';
   ledUtils = new StripLedsUtils(kiosk);
   videoUtils = new VideoUtils(kiosk);
   await app.whenReady();

@@ -36,10 +36,6 @@ export default class StripLedsUtils {
     const sleepTime = Math.floor(
       loadingTime / this.stripLeds.ledsNumbers.length,
     );
-    console.log(
-      '🚀 ~ file: strip-leds.utils.ts ~ line 39 ~ StripLedsUtils ~ startLoading ~ sleepTime',
-      sleepTime,
-    );
     while (this.toRun) {
       this.runLoading(done);
       await sleep(sleepTime);
@@ -62,7 +58,10 @@ export default class StripLedsUtils {
         this.loadingState = LoadingStateEnum.DONE;
         this.changeStripState(LedStateEnum.OFF);
         await sleep(250);
-        if (done) done();
+        if (done) {
+          console.log('🚀 ~ file: strip-leds.utils.ts ~ line 88 ~ done', done);
+          done();
+        }
         this.changeStripState(LedStateEnum.ON);
         await sleep(1000);
         this.changeStripState(LedStateEnum.OFF);
@@ -70,14 +69,6 @@ export default class StripLedsUtils {
         return;
       }
       const led = this.stripLeds.ledsNumbers[this.indexCount];
-      console.log(
-        '🚀 ~ file: strip-leds.utils.ts ~ line 74 ~ StripLedsUtils ~ runLoading ~ led',
-        led,
-      );
-      console.log(
-        '🚀 ~ file: strip-leds.utils.ts ~ line 74 ~ StripLedsUtils ~ runLoading ~ this.stripLeds',
-        this.stripLeds,
-      );
       if (led === undefined) return; //está === undefined para não apanhar no caso em que o led é 0
       this.changeLedState(led, LedStateEnum.ON);
       this.indexCount++;
