@@ -62,11 +62,11 @@ export default class StripLedsUtils {
         this.loadingState = LoadingStateEnum.DONE;
         this.changeStripState(LedStateEnum.OFF);
         await sleep(250);
+        if (done) done();
         this.changeStripState(LedStateEnum.ON);
         await sleep(1000);
         this.changeStripState(LedStateEnum.OFF);
         this.stopLoading();
-        if (done) done();
         return;
       }
       const led = this.stripLeds.ledsNumbers[this.indexCount];

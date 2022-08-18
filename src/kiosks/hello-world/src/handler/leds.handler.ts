@@ -1,6 +1,6 @@
-import { KioskType } from 'alive-kiosk/src/shared/infra/types/kiosk.type';
-import { getConnectionForButton } from 'alive-kiosk/src/shared/utils/config-connections.utils';
-import StripLedsUtils from 'alive-kiosk/src/shared/utils/strip-leds.utils';
+import { KioskType } from 'alive-kiosk/build/src/shared/infra/types/kiosk.type';
+import StripLedsUtils from 'alive-kiosk/build/src/shared/utils/strip-leds.utils';
+import { getConnectionForButton } from 'alive-kiosk/build/src/shared/utils/config-connections.utils';
 
 export const handleLoading = (
   kiosk: KioskType,
