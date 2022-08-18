@@ -1,49 +1,51 @@
 {
+  "base": {
+    "loadingTime": 1000
+  },
+  "videos": {
+    "idle": "./assets/3.mp4",
+    "1": "./assets/1.mp4",
+    "2": "./assets/2.mp4"
+  },
   "buttons": {
-    "addresses": [{
-        "gpioPin": 23,
+    "addresses": [
+      {
+        "gpioPin": 22,
         "gpioEdge": "both"
       },
       {
-        "gpioPin": 25,
+        "gpioPin": 23,
         "gpioEdge": "both"
       }
     ]
   },
   "leds": {
-    "addresses": [{
-        "gpioPin": 17
-      },
+    "addresses": [
       {
-        "gpioPin": 18
-      },
-      {
-        "gpioPin": 27
-      },
-      {
-        "gpioPin": 22
-      },
-      {
-        "gpioPin": 5
-      },
-      {
-        "gpioPin": 6
-      },
-      {
-        "gpioPin": 13
-      },
-      {
-        "gpioPin": 19
+        "numberLeds": 20,
+        "options": {
+          "gpio": 21,
+          "stripType": "ws2812"
+        }
       }
     ]
   },
-  "connections": [{
-      "button": 23,
-      "leds": [17, 18, 27, 22]
+  "connections": [
+    {
+      "button": 22,
+      "stripLeds": {
+        "gpioNumber": 21,
+        "ledsNumbers": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      },
+      "video": "1"
     },
     {
-      "button": 25,
-      "leds": [5, 6, 13, 19]
+      "button": 23,
+      "stripLeds": {
+        "gpioNumber": 21,
+        "ledsNumbers": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+      },
+      "video": "2"
     }
   ]
 }

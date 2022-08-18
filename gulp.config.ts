@@ -1,12 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config({ path: './.env' });
+
 export const gulpConfig = {
-  projectName: 'hello-word',
+  projectName: process.env.PROJECT_NAME,
   ssh: {
     ignoreError: false,
     sshConfig: {
-      host: process.env.SSH_HOST || 'alive.local',
+      host: process.env.SSH_HOST,
       port: 22,
-      username: process.env.SSH_USERNAME || 'pi',
-      password: process.env.SSH_PASSWORD || 'alive',
+      username: process.env.SSH_USER,
+      password: process.env.SSH_PASSWORD,
     },
   },
 };

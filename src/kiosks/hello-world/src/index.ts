@@ -3,12 +3,10 @@ import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
 import { kioskBuilder } from 'alive-kiosk';
 import { KioskType } from 'alive-kiosk/build/src/shared/infra/types/kiosk.type';
-import { LedUtils } from './utils/leds.utils';
-import { getConnectionForButton } from 'alive-kiosk/build/src/shared/utils/config-connections.utils';
-import { handleLoading } from './handlers/leds.handler';
-
+import StripLedsUtils from 'alive-kiosk/build/src/shared/utils/strip-leds.utils';
+import { handleLoading } from './handler/leds.handler';
 let kiosk: KioskType;
-let ledUtils: LedUtils;
+let ledUtils: StripLedsUtils;
 
 const createWindow = async () => {
   const win = new BrowserWindow({
@@ -38,7 +36,9 @@ const createWindow = async () => {
         console.log(
           `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
         );
-        handleLoading(kiosk, output, ledUtils);
+        handleLoading(kiosk, output, ledUtils, () => {
+          console.log('Acabou o login');
+        });
       },
     );
   });
@@ -54,7 +54,7 @@ const init = async () => {
   // By adding kioskbuilder here (before was on win creation), there is a huge decrease of segmentation fault and other types of error
   kiosk = await kioskBuilder(__dirname);
 
-  ledUtils = new LedUtils(kiosk);
+  ledUtils = new StripLedsUtils(kiosk);
   await app.whenReady();
   await createWindow();
 

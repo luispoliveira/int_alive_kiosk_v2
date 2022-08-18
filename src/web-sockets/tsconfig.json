@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "declaration": false,
+    "lib": ["es6", "DOM"],
+    "allowJs": false,
+    "checkJs": false,
+    "outDir": "build",
+    "rootDir": ".",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": false,
+    "resolveJsonModule": true,
+    "types": ["node", "@types/jest"],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./src/**/*.spec.ts", "tsconfig.json"],
+  "references": [{ "path": "../../" }]
+}

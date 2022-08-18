@@ -25,6 +25,8 @@
   "license": "ISC",
   "dependencies": {
     "events": "^3.3.0",
-    "onoff": "^6.0.3"
+    "onoff": "^6.0.3",
+    "rpi-ws281x-native-fixed": "^1.0.3",
+    "socket.io-client": "^4.5.1"
   }
 }

@@ -9,7 +9,7 @@ const ledStrip = new Led(21);
  */
 const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff'];
 //function to convert hex color to rgb bits
-const hexToGrb = (hex: string) => {
+const hexToGRB = (hex: string) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
@@ -41,7 +41,7 @@ const convertGrbToBits = (grb?: { g: number; r: number; b: number }) => {
 };
 
 const convertHextoGrbBits = (hex: string) => {
-  const grb = hexToGrb(hex);
+  const grb = hexToGRB(hex);
   return convertGrbToBits(grb);
 };
 
@@ -66,7 +66,7 @@ for (const color of colors) {
 }
 
 const unexportOnClose = () => {
-  // ledStrip.gpio.unexport();
+  ledStrip.gpio.unexport();
 };
 
 process.on('SIGINT', unexportOnClose);
