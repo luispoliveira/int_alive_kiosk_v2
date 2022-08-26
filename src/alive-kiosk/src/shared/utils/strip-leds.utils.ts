@@ -59,7 +59,6 @@ export default class StripLedsUtils {
         this.changeStripState(LedStateEnum.OFF);
         await sleep(250);
         if (done) {
-          console.log('🚀 ~ file: strip-leds.utils.ts ~ line 88 ~ done', done);
           done();
         }
         this.changeStripState(LedStateEnum.ON);

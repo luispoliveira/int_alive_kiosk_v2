@@ -12,7 +12,6 @@ export const handleLoading = (
     kiosk.config.connections || [],
     output.gpioNumber,
   );
-  console.log('🚀 ~ file: leds.handler.ts ~ line 15 ~ connection', connection);
 
   if (connection && connection.stripLeds) {
     if (output.value === 1) {

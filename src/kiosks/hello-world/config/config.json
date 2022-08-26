@@ -3,6 +3,7 @@
     "loadingTime": 1000,
     "defaultLanguage": "PT"
   },
+  "languages": ["PT", "EN"],
   "videos": {
     "PT": {
       "idle": {
@@ -43,11 +44,6 @@
         "gpioPin": 24,
         "gpioEdge": "both",
         "type": "LANGUAGE"
-      },
-      {
-        "gpioPin": 25,
-        "gpioEdge": "both",
-        "type": "LANGUAGE"
       }
     ]
   },
@@ -69,7 +65,9 @@
         "gpioNumber": 21,
         "ledsNumbers": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       },
-      "video": "1"
+      "video": {
+        "id": "1"
+      }
     },
     {
       "button": 23,
@@ -77,19 +75,12 @@
         "gpioNumber": 21,
         "ledsNumbers": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
       },
-      "video": "2"
-    },
-    {
-      "button": 24,
-      "language": "EN",
-      "stripLeds": {
-        "gpioNumber": 21,
-        "ledsNumbers": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+      "video": {
+        "id": "2"
       }
     },
     {
-      "button": 25,
-      "language": "PT",
+      "button": 24,
       "stripLeds": {
         "gpioNumber": 21,
         "ledsNumbers": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]

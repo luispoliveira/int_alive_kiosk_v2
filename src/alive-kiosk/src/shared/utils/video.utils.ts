@@ -26,7 +26,6 @@ export default class VideoUtils {
     const languageVideos = videos[language];
     if (!languageVideos) return;
     this.setVideos(languageVideos);
-    console.log("🚀 ~ file: video.utils.ts ~ line 29 ~ VideoUtils ~ changeLanguage ~ languageVideos", languageVideos)
   }
 
   getIdleVideoPath() {
@@ -35,10 +34,6 @@ export default class VideoUtils {
   }
 
   getVideoPath(videoId: string) {
-    console.log(
-      '🚀 ~ file: video.utils.ts ~ line 37 ~ VideoUtils ~ getVideoPath ~ this.videos',
-      this.videos,
-    );
     this.currentVideoId = videoId;
     if (!this.videos) return null;
     return this.videos[videoId].path;

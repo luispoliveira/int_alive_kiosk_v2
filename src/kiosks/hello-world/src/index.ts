@@ -9,12 +9,12 @@ import { handleLoading } from './handler/leds.handler';
 import { handleVideoSelection } from './handler/video.handler';
 import { ButtonTypeEnum } from 'alive-kiosk/build/src/shared/enums/button-type.enum';
 import { handleLanguageSelection } from './handler/language.handler';
-import { LanguagesEnum } from 'alive-kiosk/build/src/shared/enums/languages.enum';
+import LanguageUtils from 'alive-kiosk/build/src/shared/utils/language.utils';
 
 let kiosk: KioskType;
 let ledUtils: StripLedsUtils;
 let videoUtils: VideoUtils;
-
+let languageUtils: LanguageUtils;
 const createWindow = async () => {
   const win = new BrowserWindow({
     fullscreen: true,
@@ -45,13 +45,12 @@ const createWindow = async () => {
         );
 
         handleLoading(kiosk, output, ledUtils, () => {
-          console.log('🚀 ~ file: index.ts ~ line 50 ~ done', output);
           switch (output.type) {
             case ButtonTypeEnum.VIDEO:
               handleVideoSelection(kiosk, output, videoUtils, win);
               break;
             case ButtonTypeEnum.LANGUAGE:
-              handleLanguageSelection(kiosk, output, videoUtils, win);
+              handleLanguageSelection(output, languageUtils, videoUtils, win);
               break;
           }
         });
@@ -71,6 +70,7 @@ const init = async () => {
   kiosk = await kioskBuilder(__dirname);
   ledUtils = new StripLedsUtils(kiosk);
   videoUtils = new VideoUtils(kiosk);
+  languageUtils = new LanguageUtils(kiosk);
   await app.whenReady();
   await createWindow();
 

@@ -17,13 +17,16 @@ export const handleVideoSelection = (
   console.log('🚀 ~ file: video.handler.ts ~ line 18 ~ connection', connection);
 
   if (connection && connection.video) {
-    const videoPath = videoUtils.getVideoPath(connection.video);
+    const videoPath = videoUtils.getVideoPath(connection.video.id);
     if (videoPath) {
       console.log(
         '🚀 ~ file: video.handler.ts ~ line 22 ~ videoPath',
         videoPath,
       );
-      win.webContents.send('playVideo', videoPath);
+      win.webContents.send('playVideo', {
+        videoPath: videoPath,
+        timestamp: connection.video.timestamp,
+      });
     }
   }
 };

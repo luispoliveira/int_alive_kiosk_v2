@@ -17,7 +17,11 @@ const init = () => {
 
 init();
 
-ipcRenderer.on('playVideo', (e, videoPath) => {
-  video.src = videoPath;
-  video.play();
-});
+ipcRenderer.on(
+  'playVideo',
+  (e, params: { videoPath: string; timestamp?: number }) => {
+    video.src = params.videoPath;
+    video.currentTime = params.timestamp || 0;
+    video.play();
+  },
+);
