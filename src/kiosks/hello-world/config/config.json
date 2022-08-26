@@ -1,7 +1,8 @@
 {
   "base": {
     "loadingTime": 1000,
-    "defaultLanguage": "PT"
+    "defaultLanguage": "PT",
+    "idleTimeout": 500000
   },
   "languages": ["PT", "EN"],
   "videos": {
@@ -66,7 +67,8 @@
         "ledsNumbers": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       },
       "video": {
-        "id": "1"
+        "id": "1",
+        "timestamp": 15
       }
     },
     {
@@ -76,7 +78,7 @@
         "ledsNumbers": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
       },
       "video": {
-        "id": "2"
+        "id": "1"
       }
     },
     {

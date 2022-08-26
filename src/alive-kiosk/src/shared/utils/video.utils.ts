@@ -38,4 +38,20 @@ export default class VideoUtils {
     if (!this.videos) return null;
     return this.videos[videoId].path;
   }
+
+  getNextVideoId() {
+    if (!this.videos) return null;
+    const videoIds = Object.keys(this.videos);
+    videoIds.splice(videoIds.indexOf('idle'), 1);
+    console.log(
+      '🚀 ~ file: video.utils.ts ~ line 45 ~ VideoUtils ~ getNextVideoId ~ videoIds',
+      videoIds,
+    );
+    const currentIndex = videoIds.indexOf(this.currentVideoId);
+    const nextIndex = currentIndex + 1;
+    if (nextIndex >= videoIds.length) {
+      return videoIds[0];
+    }
+    return videoIds[nextIndex];
+  }
 }
