@@ -14,6 +14,7 @@ import { handleIdle } from './handler/idle.handler';
 import IdleUtils from 'alive-kiosk/build/src/shared/utils/idle.utils';
 import { VideoStateEnum } from 'alive-kiosk/build/src/shared/enums/video-state.enum';
 import { IpcRendererChannelEnum } from 'alive-kiosk/build/src/shared/enums/ipc-renderer-channel.enum';
+import { ButtonEventsEnum } from 'alive-kiosk/build/src/shared/enums/button-events.enum';
 
 let kiosk: KioskType;
 let ledUtils: StripLedsUtils;
@@ -49,7 +50,7 @@ const createWindow = async () => {
     handleIdle(idleUtils, videoUtils, win);
 
     kiosk.buttons?.on(
-      'both',
+      ButtonEventsEnum.BOTH,
       (output: { gpioNumber: number; value: number; type: ButtonTypeEnum }) => {
         console.log(
           `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
