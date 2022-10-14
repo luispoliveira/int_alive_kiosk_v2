@@ -1,11 +1,10 @@
 import { ButtonOptionsInterface } from '../../../../../shared/domain/interfaces/button.interface';
 import { ButtonTypeEnum } from '../../../../../shared/enums/button-type.enum';
-import { ButtonEventsEnum } from '../enums/button-events.enum';
 
 export declare interface ButtonEventsInterface {
   start: (config: ButtonOptionsInterface) => void;
   on(
-    event: ButtonEventsEnum.RISING,
+    event: 'rising',
     listener: (output: {
       gpioNumber: number;
       value: number;
@@ -13,7 +12,7 @@ export declare interface ButtonEventsInterface {
     }) => void,
   ): this;
   on(
-    event: ButtonEventsEnum.FALLING,
+    event: 'falling',
     listener: (output: {
       gpioNumber: number;
       value: number;
@@ -21,14 +20,14 @@ export declare interface ButtonEventsInterface {
     }) => void,
   ): this;
   on(
-    event: ButtonEventsEnum.BOTH,
+    event: 'both',
     listener: (output: {
       gpioNumber: number;
       value: number;
       type: ButtonTypeEnum;
     }) => void,
   ): this;
-  emit(event: ButtonEventsEnum.RISING, output: unknown): boolean;
-  emit(event: ButtonEventsEnum.FALLING, output: unknown): boolean;
-  emit(event: ButtonEventsEnum.BOTH, output: unknown): boolean;
+  emit(event: 'rising', output: unknown): boolean;
+  emit(event: 'falling', output: unknown): boolean;
+  emit(event: 'both', output: unknown): boolean;
 }

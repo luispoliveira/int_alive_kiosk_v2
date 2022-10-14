@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "deploy:dev": "concurrently \"make deploy-dev-alive-kiosk\" \"make deploy-dev-kiosk\""
+    "deploy:dev": "concurrently -n alive-kiosk,kiosk,web-sockets \"make deploy-dev-alive-kiosk\" \"make deploy-dev-kiosk\" \"make deploy-dev-web-sockets\""
   },
   "repository": "git@github.com:luispoliveira/int_alive_kiosk_v2.git",
   "author": "Luis Oliveira <luispedroliveira96@gmail.com>",

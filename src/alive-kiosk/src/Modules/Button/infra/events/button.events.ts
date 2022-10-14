@@ -18,6 +18,9 @@ export class ButtonEvents
         const gpioOnOffService = new GpioOnOffService(address);
 
         gpioOnOffService.gpio.watch((err, value) => {
+          console.log(
+            `Button ${gpioOnOffService.gpioEdge} ${address.gpioPin} is ${value}`,
+          );
           this.emit(gpioOnOffService.gpioEdge, {
             gpioNumber: address.gpioPin,
             value,

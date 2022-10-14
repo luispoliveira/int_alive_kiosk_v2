@@ -2,7 +2,7 @@
   "base": {
     "loadingTime": 1000,
     "defaultLanguage": "PT",
-    "idleTimeout": 500000
+    "idleVideoNumber": 2
   },
   "languages": ["PT", "EN"],
   "videos": {

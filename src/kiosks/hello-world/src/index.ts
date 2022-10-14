@@ -20,7 +20,6 @@ let ledUtils: StripLedsUtils;
 let videoUtils: VideoUtils;
 let languageUtils: LanguageUtils;
 let idleUtils: IdleUtils;
-let idleTimeout: NodeJS.Timeout;
 
 const createWindow = async () => {
   const win = new BrowserWindow({
@@ -40,23 +39,18 @@ const createWindow = async () => {
   win.loadFile(join(__dirname, './index.html'));
   win.once('ready-to-show', () => win.show());
 
-  //win.webContents.openDevTools();
+  win.webContents.openDevTools();
   // console.warn(app.getGPUFeatureStatus());
 
   win.webContents.on('did-finish-load', async () => {
-    idleUtils = new IdleUtils(win);
     /**
      * start kiosk in idle mode
      */
-    handleIdle(idleUtils, videoUtils);
-    idleTimeout = setTimeout(() => {
-      handleIdle(idleUtils, videoUtils);
-    }, kiosk.config.base?.idleTimeout || 60 * 1000);
+    handleIdle(idleUtils, videoUtils, win);
 
     kiosk.buttons?.on(
       'both',
       (output: { gpioNumber: number; value: number; type: ButtonTypeEnum }) => {
-        idleTimeout.refresh();
         console.log(
           `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
         );
@@ -65,10 +59,16 @@ const createWindow = async () => {
           idleUtils.state = VideoStateEnum.PLAYING;
           switch (output.type) {
             case ButtonTypeEnum.VIDEO:
-              handleVideoSelection(kiosk, output, videoUtils, win);
+              handleVideoSelection(kiosk, output, videoUtils, win, idleUtils);
               break;
             case ButtonTypeEnum.LANGUAGE:
-              handleLanguageSelection(output, languageUtils, videoUtils, win);
+              handleLanguageSelection(
+                output,
+                languageUtils,
+                videoUtils,
+                win,
+                idleUtils,
+              );
               break;
           }
         });
@@ -93,6 +93,7 @@ const init = async () => {
   ledUtils = new StripLedsUtils(kiosk);
   videoUtils = new VideoUtils(kiosk);
   languageUtils = new LanguageUtils(kiosk);
+  idleUtils = new IdleUtils(kiosk);
 
   await app.whenReady();
   await createWindow();

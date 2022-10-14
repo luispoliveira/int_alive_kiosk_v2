@@ -11,6 +11,7 @@ export const handleVideoSelection = (
   output: { gpioNumber: number; value: number },
   videoUtils: VideoUtils,
   win: BrowserWindow,
+  idleUtils: IdleUtils,
 ) => {
   if (output.value === 0) return;
   const connection = getConnectionForButton(
@@ -19,6 +20,7 @@ export const handleVideoSelection = (
   );
   console.log('🚀 ~ file: video.handler.ts ~ line 18 ~ connection', connection);
 
+  idleUtils.resetIdleVideoCount();
   if (connection && connection.video) {
     const videoPath = videoUtils.getVideoPath(connection.video.id);
     if (videoPath) {
@@ -39,6 +41,16 @@ export const handleVideoEnd = (
   videoUtils: VideoUtils,
   win: BrowserWindow,
 ) => {
+  if (idleUtils.runIdle()) {
+    idleUtils.state = VideoStateEnum.IDLE;
+    idleUtils.resetIdleVideoCount();
+  } else {
+    idleUtils.increateIdleVideoCount();
+  }
+
+  console.log(`IDLE COUNT: ${idleUtils.idleVideoCount}`);
+  console.log(`IDLE STATE: ${idleUtils.state}`);
+
   if (idleUtils.state === VideoStateEnum.IDLE) {
     const videoPath = videoUtils.getIdleVideoPath();
     if (videoPath) {

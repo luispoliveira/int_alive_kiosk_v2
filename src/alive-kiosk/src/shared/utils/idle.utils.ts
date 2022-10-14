@@ -1,19 +1,33 @@
 import { IpcRendererChannelEnum } from '../enums/ipc-renderer-channel.enum';
 import { VideoStateEnum } from '../enums/video-state.enum';
+import { KioskType } from '../infra/types/kiosk.type';
 
 export default class IdleUtils {
   state: VideoStateEnum | null = null;
-  win: any;
+  kiosk: KioskType;
+  idleVideoCount = 1;
 
-  constructor(win: any) {
-    this.win = win;
+  constructor(kiosk: KioskType) {
+    this.kiosk = kiosk;
   }
 
-  setIdle(idleVideoPath: string) {
+  increateIdleVideoCount() {
+    this.idleVideoCount++;
+  }
+
+  resetIdleVideoCount() {
+    this.idleVideoCount = 1;
+  }
+
+  runIdle(): boolean {
+    if (this.state === VideoStateEnum.IDLE) return false;
+    if (!this.kiosk.config.base?.idleVideoNumber) return false;
+    return this.idleVideoCount === this.kiosk.config.base?.idleVideoNumber;
+  }
+
+  setIdle() {
     if (this.state === VideoStateEnum.IDLE) return;
     this.state = VideoStateEnum.IDLE;
-    this.win.webContents.send(IpcRendererChannelEnum.PlayVideo, {
-      videoPath: idleVideoPath,
-    });
+    this.idleVideoCount = 1;
   }
 }

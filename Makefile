@@ -18,4 +18,7 @@ deploy-dev-alive-kiosk:
 deploy-dev-kiosk:
 	@echo "Deploying kiosk ${PROJECT_NAME}..."
 	cd src/kiosks/${PROJECT_NAME} && npm run watch
-	
+
+deploy-dev-web-sockets:
+	@echo "Deploying web sockets..."
+	cd src/web-sockets && npm run watch
