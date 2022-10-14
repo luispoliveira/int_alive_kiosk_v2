@@ -1,3 +1,4 @@
+import { LedEventsEnum } from '../../Modules/Led/infra/events/enums/led.events.enum';
 import { LedStateEnum } from '../enums/led-state.enum';
 import { LoadingStateEnum } from '../enums/loading-state.enum';
 import { KioskType } from '../infra/types/kiosk.type';
@@ -82,7 +83,7 @@ export default class StripLedsUtils {
 
     switch (state) {
       case LedStateEnum.ON:
-        this.kiosk.leds?.emit('intervalOn', {
+        this.kiosk.leds?.emit(LedEventsEnum.INTERVAL_ON, {
           gpioPin: this.stripLeds.gpioNumber,
           from: this.stripLeds.ledsNumbers[0],
           to: this.stripLeds.ledsNumbers[this.stripLeds.ledsNumbers.length - 1],
@@ -90,7 +91,7 @@ export default class StripLedsUtils {
         });
         return;
       case LedStateEnum.OFF:
-        this.kiosk.leds?.emit('intervalOff', {
+        this.kiosk.leds?.emit(LedEventsEnum.INTERVAL_OFF, {
           gpioPin: this.stripLeds.gpioNumber,
           from: this.stripLeds.ledsNumbers[0],
           to: this.stripLeds.ledsNumbers[this.stripLeds.ledsNumbers.length - 1],
@@ -104,14 +105,14 @@ export default class StripLedsUtils {
 
     switch (state) {
       case LedStateEnum.ON:
-        this.kiosk.leds?.emit('on', {
+        this.kiosk.leds?.emit(LedEventsEnum.ON, {
           gpioPin: this.stripLeds.gpioNumber,
           ledNumber: ledNumber,
           color,
         });
         return;
       case LedStateEnum.OFF:
-        this.kiosk.leds?.emit('off', {
+        this.kiosk.leds?.emit(LedEventsEnum.OFF, {
           gpioPin: this.stripLeds.gpioNumber,
           ledNumber: ledNumber,
         });

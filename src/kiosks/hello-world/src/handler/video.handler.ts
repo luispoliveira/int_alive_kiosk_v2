@@ -4,6 +4,7 @@ import VideoUtils from 'alive-kiosk/build/src/shared/utils/video.utils';
 import { BrowserWindow } from 'electron';
 import { VideoStateEnum } from 'alive-kiosk/build/src/shared/enums/video-state.enum';
 import IdleUtils from 'alive-kiosk/build/src/shared/utils/idle.utils';
+import { IpcRendererChannelEnum } from 'alive-kiosk/build/src/shared/enums/ipc-renderer-channel.enum';
 
 export const handleVideoSelection = (
   kiosk: KioskType,
@@ -25,7 +26,7 @@ export const handleVideoSelection = (
         '🚀 ~ file: video.handler.ts ~ line 22 ~ videoPath',
         videoPath,
       );
-      win.webContents.send('playVideo', {
+      win.webContents.send(IpcRendererChannelEnum.PlayVideo, {
         videoPath: videoPath,
         timestamp: connection.video.timestamp,
       });
@@ -41,7 +42,7 @@ export const handleVideoEnd = (
   if (idleUtils.state === VideoStateEnum.IDLE) {
     const videoPath = videoUtils.getIdleVideoPath();
     if (videoPath) {
-      win.webContents.send('playVideo', {
+      win.webContents.send(IpcRendererChannelEnum.PlayVideo, {
         videoPath: videoPath,
         timestamp: 0,
       });
@@ -54,7 +55,7 @@ export const handleVideoEnd = (
       const videoPath = videoUtils.getVideoPath(nextVideoId);
       if (videoPath) {
         idleUtils.state = VideoStateEnum.PLAYING;
-        win.webContents.send('playVideo', {
+        win.webContents.send(IpcRendererChannelEnum.PlayVideo, {
           videoPath: videoPath,
           timestamp: 0,
         });

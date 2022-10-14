@@ -1,3 +1,4 @@
+import { IpcRendererChannelEnum } from '../enums/ipc-renderer-channel.enum';
 import { VideoStateEnum } from '../enums/video-state.enum';
 
 export default class IdleUtils {
@@ -11,7 +12,7 @@ export default class IdleUtils {
   setIdle(idleVideoPath: string) {
     if (this.state === VideoStateEnum.IDLE) return;
     this.state = VideoStateEnum.IDLE;
-    this.win.webContents.send('playVideo', {
+    this.win.webContents.send(IpcRendererChannelEnum.PlayVideo, {
       videoPath: idleVideoPath,
     });
   }

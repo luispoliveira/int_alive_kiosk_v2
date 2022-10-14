@@ -13,6 +13,7 @@ import LanguageUtils from 'alive-kiosk/build/src/shared/utils/language.utils';
 import { handleIdle } from './handler/idle.handler';
 import IdleUtils from 'alive-kiosk/build/src/shared/utils/idle.utils';
 import { VideoStateEnum } from 'alive-kiosk/build/src/shared/enums/video-state.enum';
+import { IpcRendererChannelEnum } from 'alive-kiosk/build/src/shared/enums/ipc-renderer-channel.enum';
 
 let kiosk: KioskType;
 let ledUtils: StripLedsUtils;
@@ -39,7 +40,7 @@ const createWindow = async () => {
   win.loadFile(join(__dirname, './index.html'));
   win.once('ready-to-show', () => win.show());
 
-  win.webContents.openDevTools();
+  //win.webContents.openDevTools();
   // console.warn(app.getGPUFeatureStatus());
 
   win.webContents.on('did-finish-load', async () => {
@@ -74,8 +75,7 @@ const createWindow = async () => {
       },
     );
 
-    ipcMain.on('videoHasEnded', (evt, _) => {
-      console.log('Video has ended');
+    ipcMain.on(IpcRendererChannelEnum.VideoHasEnded, (evt, _) => {
       handleVideoEnd(idleUtils, videoUtils, win);
     });
   });
