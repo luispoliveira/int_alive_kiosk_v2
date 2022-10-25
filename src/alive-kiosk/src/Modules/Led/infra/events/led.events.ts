@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { LedOptionsInterface } from '../../../../shared/domain/interfaces/led.interface';
+import { LedOptionsInterface } from '../../../../shared/domain/interfaces';
 import { SocketIoService } from '../../services/socket-io.service';
 import { LedEventsInterface } from './interfaces/led.events.interface';
 

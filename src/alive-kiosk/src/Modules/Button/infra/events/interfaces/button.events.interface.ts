@@ -1,6 +1,5 @@
-import { ButtonOptionsInterface } from '../../../../../shared/domain/interfaces/button.interface';
-import { ButtonTypeEnum } from '../../../../../shared/enums/button-type.enum';
-import { ButtonEventsEnum } from '../../../../../shared/enums/button-events.enum';
+import { ButtonOptionsInterface } from '../../../../../shared/domain/interfaces';
+import { ButtonEventsEnum, ButtonTypeEnum } from '../../../../../shared/enums';
 
 export declare interface ButtonEventsInterface {
   start: (config: ButtonOptionsInterface) => void;

@@ -1,4 +1,4 @@
-import { LedOptionsInterface } from '../../../../../shared/domain/interfaces/led.interface';
+import { LedOptionsInterface } from '../../../../../shared/domain/interfaces';
 import { LedEventsEnum } from '../enums/led.events.enum';
 
 export declare interface LedEventsInterface {

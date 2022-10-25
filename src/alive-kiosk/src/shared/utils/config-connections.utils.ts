@@ -1,4 +1,4 @@
-import { ConnectionInterface } from '../domain/interfaces/connection.interface';
+import { ConnectionInterface } from '../domain/interfaces';
 
 export const getConnectionForButton = (
   connections: ConnectionInterface[],

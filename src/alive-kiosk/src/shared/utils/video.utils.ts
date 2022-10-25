@@ -1,5 +1,5 @@
-import { VideoInterface } from '../domain/interfaces/video.interface';
-import { LanguagesEnum } from '../enums/languages.enum';
+import { VideoInterface } from '../domain/interfaces';
+import { LanguagesEnum } from '../enums';
 import { KioskType } from '../infra/types/kiosk.type';
 
 export default class VideoUtils {

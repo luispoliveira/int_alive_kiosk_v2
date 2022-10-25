@@ -1,4 +1,4 @@
-import { LanguagesEnum } from '../../enums/languages.enum';
+import { LanguagesEnum } from '../../enums';
 
 export interface BaseInterface {
   loadingTime?: number;

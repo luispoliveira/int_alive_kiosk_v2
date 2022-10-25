@@ -1,5 +1,5 @@
-import { ConfigInterface } from '../domain/interfaces/config.interface';
-import { file } from '../utils/file';
+import { ConfigInterface } from '../domain/interfaces';
+import { file } from '../utils';
 import { ConfigApiInterface } from './interfaces/config.api.interface';
 
 export class ConfigApi implements ConfigApiInterface {

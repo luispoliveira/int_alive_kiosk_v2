@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { ButtonOptionsInterface } from '../../../../shared/domain/interfaces/button.interface';
+import { ButtonOptionsInterface } from '../../../../shared/domain/interfaces';
 import { GpioOnOffService } from '../../services/gpio.service';
 import { ButtonEventsInterface } from './interfaces/button.events.interface';
 

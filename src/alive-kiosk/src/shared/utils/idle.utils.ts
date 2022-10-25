@@ -1,5 +1,4 @@
-import { IpcRendererChannelEnum } from '../enums/ipc-renderer-channel.enum';
-import { VideoStateEnum } from '../enums/video-state.enum';
+import { VideoStateEnum } from '../enums';
 import { KioskType } from '../infra/types/kiosk.type';
 
 export default class IdleUtils {

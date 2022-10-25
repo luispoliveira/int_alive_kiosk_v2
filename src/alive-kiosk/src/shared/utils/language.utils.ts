@@ -1,4 +1,4 @@
-import { LanguagesEnum } from '../enums/languages.enum';
+import { LanguagesEnum, LoggerEventsEnum } from '../enums';
 import { KioskType } from '../infra/types/kiosk.type';
 
 export default class LanguageUtils {
@@ -9,8 +9,14 @@ export default class LanguageUtils {
 
   constructor(kiosk: KioskType) {
     this.kiosk = kiosk;
-    if (!this.kiosk.config.languages)
-      throw new Error('Config languages not found');
+    if (!this.kiosk.config.languages) {
+      const message = 'Config languages not found';
+      this.kiosk.logger?.emit(LoggerEventsEnum.ERROR, {
+        message,
+      });
+      throw new Error(message);
+    }
+
     this.languages = this.kiosk.config.languages;
   }
 

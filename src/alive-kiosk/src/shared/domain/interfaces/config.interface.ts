@@ -1,12 +1,16 @@
-import { LanguagesEnum } from '../../enums/languages.enum';
-import { BaseInterface } from './base.interface';
-import { ButtonOptionsInterface } from './button.interface';
-import { ConnectionInterface } from './connection.interface';
-import { LedOptionsInterface } from './led.interface';
-import { VideoOptionsInterface } from './video.interface';
+import {
+  BaseInterface,
+  ButtonOptionsInterface,
+  ConnectionInterface,
+  LedOptionsInterface,
+  LoggerInterface,
+  VideoOptionsInterface,
+} from '.';
+import { LanguagesEnum } from '../../enums';
 
 export interface ConfigInterface {
   base?: BaseInterface;
+  logger?: LoggerInterface;
   languages?: LanguagesEnum[];
   videos?: VideoOptionsInterface;
   buttons?: ButtonOptionsInterface;

@@ -1,5 +1,5 @@
 import { Edge, Options } from 'onoff';
-import { ButtonTypeEnum } from '../../enums/button-type.enum';
+import { ButtonTypeEnum } from '../../enums';
 
 export interface ButtonInterface {
   gpioPin: number;

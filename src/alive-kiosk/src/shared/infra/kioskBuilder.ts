@@ -1,6 +1,8 @@
 import { ButtonEvents } from '../../Modules/Button/infra/events/button.events';
 import { LedEvents } from '../../Modules/Led/infra/events/led.events';
+import { LoggerEvents } from '../../Modules/Logger/infra/events/logger.events';
 import { ConfigApi } from '../config/config.api';
+import { LoggerEventsEnum } from '../enums/logger-events.enum';
 import { KioskType } from './types/kiosk.type';
 
 export const kioskBuilder = async (rootPath: string): Promise<KioskType> => {
@@ -15,6 +17,10 @@ export const kioskBuilder = async (rootPath: string): Promise<KioskType> => {
     config,
   };
 
+  const loggerEvents = new LoggerEvents();
+  loggerEvents.start(config.logger);
+  kiosk.logger = loggerEvents;
+
   if (config.buttons) {
     const buttonEvents = new ButtonEvents();
     buttonEvents.start(config.buttons);
@@ -27,12 +33,11 @@ export const kioskBuilder = async (rootPath: string): Promise<KioskType> => {
     kiosk.leds = ledEvents;
   }
 
-  console.info(
-    `Alive Kiosk started with:`,
-    Object.keys(kiosk)
+  kiosk.logger.emit(LoggerEventsEnum.WARN, {
+    message: `Alive Kiosk started with: ${Object.keys(kiosk)
       .map((key) => key)
-      .join(' '),
-  );
+      .join(' ')}`,
+  });
 
   return kiosk;
 };

@@ -1,6 +1,5 @@
 import { LedEventsEnum } from '../../Modules/Led/infra/events/enums/led.events.enum';
-import { LedStateEnum } from '../enums/led-state.enum';
-import { LoadingStateEnum } from '../enums/loading-state.enum';
+import { LedStateEnum, LoadingStateEnum, LoggerEventsEnum } from '../enums';
 import { KioskType } from '../infra/types/kiosk.type';
 import { sleep } from './sleep';
 
@@ -74,7 +73,7 @@ export default class StripLedsUtils {
       this.changeLedState(led, LedStateEnum.ON);
       this.indexCount++;
     } catch (e) {
-      console.error(e);
+      this.kiosk.logger?.emit(LoggerEventsEnum.ERROR, { e });
       throw e;
     }
   }
