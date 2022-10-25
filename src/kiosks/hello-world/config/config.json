@@ -5,6 +5,9 @@
     "idleVideoNumber": 2
   },
   "languages": ["PT", "EN"],
+  "logger": {
+    "kioskLoggerMode": "DEBUG"
+  },
   "videos": {
     "PT": {
       "idle": {

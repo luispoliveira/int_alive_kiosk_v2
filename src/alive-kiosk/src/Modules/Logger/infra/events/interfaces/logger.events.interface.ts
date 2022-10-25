@@ -6,23 +6,23 @@ export interface LoggerEventsInterface {
 
   on(
     event: LoggerEventsEnum.FATAL,
-    listener: (output: { message: string }) => void,
+    listener: (output: { format: any; params: any[] }) => void,
   ): this;
   on(
     event: LoggerEventsEnum.ERROR,
-    listener: (output: { message: string }) => void,
+    listener: (output: { format: any; params: any[] }) => void,
   ): this;
   on(
     event: LoggerEventsEnum.WARN,
-    listener: (output: { message: string }) => void,
+    listener: (output: { format: any; params: any[] }) => void,
   ): this;
   on(
     event: LoggerEventsEnum.INFO,
-    listener: (output: { message: string }) => void,
+    listener: (output: { format: any; params: any[] }) => void,
   ): this;
   on(
     event: LoggerEventsEnum.DEBUG,
-    listener: (output: { message: string }) => void,
+    listener: (output: { format: any; params: any[] }) => void,
   ): this;
 
   emit(event: LoggerEventsEnum.FATAL, output: unknown): boolean;

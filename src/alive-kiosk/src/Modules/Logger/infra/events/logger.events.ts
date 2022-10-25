@@ -16,29 +16,41 @@ export class LoggerEvents
   start(config?: LoggerInterface) {
     this.bunyanService = new BunyanService();
 
-    this.on(LoggerEventsEnum.FATAL, (output: { message: string }) => {
-      this.bunyanService?.fatal(output.message);
+    this.on(
+      LoggerEventsEnum.FATAL,
+      (output: { format: any; params: any[] }) => {
+        console.log('Fatal');
+        this.bunyanService?.fatal(output.format, ...output.params);
+      },
+    );
+
+    this.on(
+      LoggerEventsEnum.ERROR,
+      (output: { format: any; params: any[] }) => {
+        console.log('Error');
+        this.bunyanService?.error(output.format, ...output.params);
+      },
+    );
+
+    this.on(LoggerEventsEnum.WARN, (output: { format: any; params: any[] }) => {
+      console.log('Warning');
+      this.bunyanService?.warn(output.format, ...output.params);
     });
 
-    this.on(LoggerEventsEnum.ERROR, (output: { message: string }) => {
-      this.bunyanService?.error(output.message);
-    });
-
-    this.on(LoggerEventsEnum.WARN, (output: { message: string }) => {
-      this.bunyanService?.warn(output.message);
-    });
-
-    this.on(LoggerEventsEnum.INFO, (output: { message: string }) => {
+    this.on(LoggerEventsEnum.INFO, (output: { format: any; params: any[] }) => {
       if (
         config?.kioskLoggerMode === LoggerModeEnum.DEBUG ||
         config?.kioskLoggerMode === LoggerModeEnum.INFO
       )
-        this.bunyanService?.info(output.message);
+        this.bunyanService?.info(output.format, ...output.params);
     });
 
-    this.on(LoggerEventsEnum.DEBUG, (output: { message: string }) => {
-      if (config?.kioskLoggerMode === LoggerModeEnum.DEBUG)
-        this.bunyanService?.debug(output.message);
-    });
+    this.on(
+      LoggerEventsEnum.DEBUG,
+      (output: { format: any; params: any[] }) => {
+        if (config?.kioskLoggerMode === LoggerModeEnum.DEBUG)
+          this.bunyanService?.debug(output.format, ...output.params);
+      },
+    );
   }
 }

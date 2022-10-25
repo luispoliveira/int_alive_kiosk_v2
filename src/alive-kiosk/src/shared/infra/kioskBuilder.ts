@@ -34,9 +34,10 @@ export const kioskBuilder = async (rootPath: string): Promise<KioskType> => {
   }
 
   kiosk.logger.emit(LoggerEventsEnum.WARN, {
-    message: `Alive Kiosk started with: ${Object.keys(kiosk)
+    format: `Alive Kiosk started with: ${Object.keys(kiosk)
       .map((key) => key)
       .join(' ')}`,
+    params: [],
   });
 
   return kiosk;

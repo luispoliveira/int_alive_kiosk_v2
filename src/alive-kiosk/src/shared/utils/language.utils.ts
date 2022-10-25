@@ -12,7 +12,8 @@ export default class LanguageUtils {
     if (!this.kiosk.config.languages) {
       const message = 'Config languages not found';
       this.kiosk.logger?.emit(LoggerEventsEnum.ERROR, {
-        message,
+        format: message,
+        params: [],
       });
       throw new Error(message);
     }

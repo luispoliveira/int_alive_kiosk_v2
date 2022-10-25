@@ -8,22 +8,37 @@ export class LoggerUtils {
   }
 
   fatal(message: string) {
-    this.kiosk?.logger?.emit(LoggerEventsEnum.FATAL, { message });
+    this.kiosk?.logger?.emit(LoggerEventsEnum.FATAL, {
+      format: message,
+      params: [],
+    });
   }
 
   error(message: string) {
-    this.kiosk?.logger?.emit(LoggerEventsEnum.ERROR, { message });
+    this.kiosk?.logger?.emit(LoggerEventsEnum.ERROR, {
+      format: message,
+      params: [],
+    });
   }
 
   warn(message: string) {
-    this.kiosk?.logger?.emit(LoggerEventsEnum.WARN, { message });
+    this.kiosk?.logger?.emit(LoggerEventsEnum.WARN, {
+      format: message,
+      params: [],
+    });
   }
 
   info(message: string) {
-    this.kiosk?.logger?.emit(LoggerEventsEnum.INFO, { message });
+    this.kiosk?.logger?.emit(LoggerEventsEnum.INFO, {
+      format: message,
+      params: [],
+    });
   }
 
   debug(message: string) {
-    this.kiosk?.logger?.emit(LoggerEventsEnum.DEBUG, { message });
+    this.kiosk?.logger?.emit(LoggerEventsEnum.DEBUG, {
+      format: message,
+      params: [],
+    });
   }
 }

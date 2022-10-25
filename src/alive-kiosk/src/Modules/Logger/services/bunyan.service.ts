@@ -7,7 +7,7 @@ export class BunyanService extends Logger {
         {
           level: 'fatal',
           type: 'rotating-file',
-          path: './logs/kiosk-fatal.log',
+          path: './logs/kiosk-error.log',
           period: '1d',
           count: 7,
         },
@@ -21,7 +21,7 @@ export class BunyanService extends Logger {
         {
           level: 'warn',
           type: 'rotating-file',
-          path: './logs/kiosk-warn.log',
+          path: './logs/kiosk-error.log',
           period: '1d',
           count: 7,
         },

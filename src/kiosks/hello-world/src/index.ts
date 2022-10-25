@@ -3,20 +3,27 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import { join } from 'path';
 import { kioskBuilder } from 'alive-kiosk';
 import { KioskType } from 'alive-kiosk/build/src/shared/infra/types/kiosk.type';
-import StripLedsUtils from 'alive-kiosk/build/src/shared/utils/strip-leds.utils';
-import VideoUtils from 'alive-kiosk/build/src/shared/utils/video.utils';
 import { handleLoading } from './handler/leds.handler';
 import { handleVideoEnd, handleVideoSelection } from './handler/video.handler';
-import { ButtonTypeEnum } from 'alive-kiosk/build/src/shared/enums/button-type.enum';
 import { handleLanguageSelection } from './handler/language.handler';
-import LanguageUtils from 'alive-kiosk/build/src/shared/utils/language.utils';
 import { handleIdle } from './handler/idle.handler';
-import IdleUtils from 'alive-kiosk/build/src/shared/utils/idle.utils';
-import { VideoStateEnum } from 'alive-kiosk/build/src/shared/enums/video-state.enum';
-import { IpcRendererChannelEnum } from 'alive-kiosk/build/src/shared/enums/ipc-renderer-channel.enum';
-import { ButtonEventsEnum } from 'alive-kiosk/build/src/shared/enums/button-events.enum';
+import {
+  ButtonEventsEnum,
+  ButtonTypeEnum,
+  IpcRendererChannelEnum,
+  LoggerEventsEnum,
+  VideoStateEnum,
+} from 'alive-kiosk/build/src/shared/enums/index';
+import {
+  StripLedsUtils,
+  VideoUtils,
+  LanguageUtils,
+  LoggerUtils,
+  IdleUtils,
+} from 'alive-kiosk/build/src/shared/utils/index';
 
 let kiosk: KioskType;
+let loggerUtils: LoggerUtils;
 let ledUtils: StripLedsUtils;
 let videoUtils: VideoUtils;
 let languageUtils: LanguageUtils;
@@ -52,7 +59,7 @@ const createWindow = async () => {
     kiosk.buttons?.on(
       ButtonEventsEnum.BOTH,
       (output: { gpioNumber: number; value: number; type: ButtonTypeEnum }) => {
-        console.log(
+        loggerUtils.debug(
           `Botão do GPIO: ${output.gpioNumber} - Valor: ${output.value}`,
         );
 
@@ -94,6 +101,7 @@ const init = async () => {
   ledUtils = new StripLedsUtils(kiosk);
   videoUtils = new VideoUtils(kiosk);
   languageUtils = new LanguageUtils(kiosk);
+  loggerUtils = new LoggerUtils(kiosk);
   idleUtils = new IdleUtils(kiosk);
 
   await app.whenReady();
