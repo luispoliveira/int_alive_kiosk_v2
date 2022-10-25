@@ -48,9 +48,6 @@ export const handleVideoEnd = (
     idleUtils.increateIdleVideoCount();
   }
 
-  console.log(`IDLE COUNT: ${idleUtils.idleVideoCount}`);
-  console.log(`IDLE STATE: ${idleUtils.state}`);
-
   if (idleUtils.state === VideoStateEnum.IDLE) {
     const videoPath = videoUtils.getIdleVideoPath();
     if (videoPath) {

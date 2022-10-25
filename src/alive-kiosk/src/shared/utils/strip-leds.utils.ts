@@ -11,6 +11,7 @@ export default class StripLedsUtils {
   toRun = false;
   isBlocked = false;
   indexCount = 0;
+  defaultColor = 0xff0000;
 
   constructor(kiosk: KioskType) {
     this.kiosk = kiosk;
@@ -78,7 +79,7 @@ export default class StripLedsUtils {
     }
   }
 
-  changeStripState(state: LedStateEnum, color = 0xffffff) {
+  changeStripState(state: LedStateEnum, color = this.defaultColor) {
     if (!this.stripLeds) return;
 
     switch (state) {
@@ -100,7 +101,11 @@ export default class StripLedsUtils {
     }
   }
 
-  changeLedState(ledNumber: number, state: LedStateEnum, color = 0xffffff) {
+  changeLedState(
+    ledNumber: number,
+    state: LedStateEnum,
+    color = this.defaultColor,
+  ) {
     if (!this.stripLeds) return;
 
     switch (state) {
