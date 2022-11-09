@@ -7,6 +7,7 @@
     "test:led": "node leds/index.js",
     "test:led:strip": "node leds/ws2812.js",
     "test:button": "node buttons/index.js",
+    "test:ir": "node ir/index.js",
     "build": "tsc",
     "watch": "gulp --color watchTask"
   },
@@ -14,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lirc-client": "^2.0.0",
     "onoff": "^6.0.3",
     "rpi-ws281x-native-fixed": "^1.0.3"
   },

@@ -22,3 +22,7 @@ deploy-dev-kiosk:
 deploy-dev-web-sockets:
 	@echo "Deploying web sockets..."
 	cd src/web-sockets && npm run watch
+
+deploy-tests:
+	@echo "Deploying tests..."
+	cd src/tests && npm run watch
