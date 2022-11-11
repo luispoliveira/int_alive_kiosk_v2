@@ -1,7 +1,7 @@
 /**
  * https://www.digikey.pt/en/maker/blogs/2021/how-to-send-and-receive-ir-signals-with-a-raspberry-pi
  * sudo nano /boot/config.txt
- * dtoverlay=gpio-ir,gpio_pin=17
+ *  dtoverlay=gpio-ir,gpio_pin=17
  * sudo reboot now
  * sudo apt update
  * sudo apt install ir-keytable
