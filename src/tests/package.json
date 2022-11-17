@@ -8,6 +8,7 @@
     "test:led:strip": "node leds/ws2812.js",
     "test:button": "node buttons/index.js",
     "test:ir": "node ir/index.js",
+    "test:led-button": "node leds/buttons-ledv2.js",
     "build": "tsc",
     "watch": "gulp --color watchTask"
   },
