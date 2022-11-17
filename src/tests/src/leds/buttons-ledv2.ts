@@ -21,7 +21,7 @@ button1.gpio.watch((err, value: BinaryValue) => {
 button2.gpio.watch((err, value: BinaryValue) => {
   console.log(`Button value: ${value}`);
   if (value === 1) {
-    stripLeds.turnIntervalOn(10, 19, 0xff0000);
+    stripLeds.turnIntervalOn(10, 19, 0x00ff00);
   } else {
     stripLeds.turnIntervalOff(10, 19);
   }
